@@ -2,8 +2,8 @@
 
 // validate check function
 const validate = function(email) {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 
 // selectors
@@ -15,6 +15,10 @@ const errorMsg = document.querySelector('.error-msg');
 btn.addEventListener(
     'click', function() {
         if (!validate(email.textContent)) {
+            errorMsg.classList.add('error-none');
+            email.classList.remove('error');
+        }
+        else {
             errorMsg.classList.remove('error-none');
             email.classList.add('error');
         }
